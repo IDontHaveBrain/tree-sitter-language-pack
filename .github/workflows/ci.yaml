@@ -150,6 +150,19 @@ jobs:
       env:
         PROJECT_ROOT: ${{github.workspace}}
 
+    - name: Install delvewheel (Windows only)
+      if: runner.os == 'Windows'
+      run: pip install delvewheel
+
+    - name: Apply delvewheel to repair wheel (Windows only)
+      if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        wheel_file=$(ls dist/*.whl)
+        echo "Processing wheel: $wheel_file"
+        delvewheel repair $wheel_file -w wheelhouse
+        mv wheelhouse/* dist/
+
     - name: Upload wheel artifact
       uses: actions/upload-artifact@v4
       with:
