@@ -39,6 +39,7 @@ def create_extension(*, language_name: str) -> Extension:
             "/wd4819",  # Suppress warnings about source files with encoding issues
             "/DWINVER=0x0A00",  # Windows 10
             "/D_WIN32_WINNT=0x0A00",  # Windows 10 target
+            "/MD",
         ]
     )
 
